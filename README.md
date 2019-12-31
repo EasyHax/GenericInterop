@@ -77,7 +77,7 @@ class WinApi
 //Since it has 'out' parameters, we have to call deleg first
 
 var addr_GetCTSL = WinApi.GetProcAddress(WinApi.LoadLibrary("kernel32.dll"), "GetCurrentThreadStackLimits");
-var GetCTSL = addr_GetSysColor.deleg(GenericInterop.CreateDelegate(CallingConvention.Winapi, tVoid, tIntPtr, tIntPtr));
+var GetCTSL = addr_GetSysColor.deleg(CallingConvention.Winapi, tVoid, tIntPtr, tIntPtr);
 var lowLimit  = 0u;
 var highLimit = 0u;
 
