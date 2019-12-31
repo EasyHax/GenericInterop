@@ -49,7 +49,7 @@ var pSomeNativeClass = (IntPtr)192156486; // pointer to SomeNativeClass
 var addr_VFunc1      = GenericInterop.GetAddrOfVFunc(pSomeNativeClass, 2);
 
 // Wrap Func2 and DynamicInvoke it later
-var VFunc2 = addr_VFunc2.deleg(GenericInterop.CreateDelegate(CallingConvention.ThisCall, tIntPtr, tString));
+var VFunc2 = addr_VFunc2.deleg(CallingConvention.ThisCall, tIntPtr, tString);
   // call Func2, don't forget this pointer
 var ret_vfunc2 = VFunc2.DynamicInvoke(pSomeNativeClass, "SomeString"); 
 
