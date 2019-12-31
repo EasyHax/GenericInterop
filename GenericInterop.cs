@@ -1,5 +1,8 @@
 public static class GenericInterop
     {
+        public static Delegate WrapVFunc(this IntPtr pClass, int index, Type return_Type, params Type[] args_Type) =>
+            GetAddrOfVFunc(pClass, index).deleg(CreateDelegate(CallingConvention.ThisCall, return_Type, args_Type));
+    
         public static T call<T>(this IntPtr addr, CallingConvention callingConvention, params object[] args)
         {
             var tArgs = new Type[args.Length];
