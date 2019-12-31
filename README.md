@@ -17,6 +17,7 @@ public static Type tVoid   = null;
 
 ## Example 1 : Call Virtual Functions ( Useful in game hacking )
 
+### Some c++ interface with want to interact with
 ```cpp
 struct SomeStruct { };
 
