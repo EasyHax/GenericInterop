@@ -32,16 +32,16 @@ public:
 ### Call Func1
 ```cs
 var pSomeNativeClass = (IntPtr)192156486; // pointer to SomeNativeClass
-var addr_VFunc1      = GenericInterop.GetAddrOfVFunc(pSomeNativeClass, 1);
 
 // Wrap Func1 and DynamicInvoke it later
-var VFunc1 = addr_VFunc1.deleg(GenericInterop.CreateDelegate(CallingConvention.ThisCall, tInt32, tInt32, tInt32));
-  // call Func1, don't forget this pointer
+var VFunc1 = pSomeNativeClass.WrapVFunc(1, tInt32, tInt32, tInt32);
+// call Func1, don't forget this pointer
 var ret_vfunc1 = VFunc1.DynamicInvoke(pSomeNativeClass, 12, 13); 
 
 // Directly call Func1
-  // call Func1, don't forget this pointer
-var ret_vfunc1 = addr_VFunc1.call<int>(CallingConvention.ThisCall, pSomeNativeClass, 12, 13);
+var addr_VFunc1 = GenericInterop.GetAddrOfVFunc(pSomeNativeClass, 1);
+// call Func1, don't forget this pointer
+var ret_vfunc1  = addr_VFunc1.call<int>(CallingConvention.ThisCall, pSomeNativeClass, 12, 13);
 ```
 ### Call Func2
 ```cs
