@@ -1,8 +1,8 @@
 public static class GenericInterop
     {
         public static Delegate WrapVFunc(this IntPtr pClass, int index, Type return_Type, params Type[] args_Type) =>
-            GetAddrOfVFunc(pClass, index).deleg(CreateDelegate(CallingConvention.ThisCall, return_Type, args_Type));
-    
+            GetAddrOfVFunc(pClass, index).deleg(CallingConvention.ThisCall, return_Type, args_Type);
+
         public static T call<T>(this IntPtr addr, CallingConvention callingConvention, params object[] args)
         {
             var tArgs = new Type[args.Length];
@@ -20,7 +20,8 @@ public static class GenericInterop
             return *(IntPtr*)(&tr);
         }
 
-        public static Delegate deleg(this IntPtr addr, Type type) => Marshal.GetDelegateForFunctionPointer(addr, type);
+        public static Delegate deleg(this IntPtr addr, CallingConvention callingConvention, Type returntype, params Type[] args) 
+            => Marshal.GetDelegateForFunctionPointer(addr, CreateDelegate(callingConvention, returntype, args));
         unsafe public static IntPtr GetAddrOfVFunc(IntPtr pClass, int index_VFunc) => *(IntPtr*)(*(IntPtr*)pClass + index_VFunc * 0x4);
 
         public static Type CreateDelegate(CallingConvention callingConvention, Type returntype, params Type[] args)
