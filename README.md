@@ -53,7 +53,7 @@ var VFunc2 = addr_VFunc2.deleg(CallingConvention.ThisCall, tIntPtr, tString);
 var ret_vfunc2 = VFunc2.DynamicInvoke(pSomeNativeClass, "SomeString"); 
 
 // Directly call Func2
-var addr_VFunc1 = GenericInterop.GetAddrOfVFunc(pSomeNativeClass, 2);
+var addr_VFunc2 = GenericInterop.GetAddrOfVFunc(pSomeNativeClass, 2);
 // call Func2, don't forget this pointer
 var ret_vfunc2 = addr_VFunc2.call<int>(CallingConvention.ThisCall, pSomeNativeClass, "SomeString");
 ```
